@@ -1,6 +1,15 @@
+1)
+a[N]中
+int a[5]={4,6,8,4,2};
+auto it=find(a,a+5,target);
+cout<<it<<endl;//地址
+cout<<it-a<<endl;//目标值下标
+cout<<*it<<endl;//具体目标值
+
+2)
 vector中
 vector<int> nums;
-auto it=nums.find(nums.begin(),nums.end(),target);
+auto it=find(nums.begin(),nums.end(),target);//vector自身没有有find()函数
 if(it!=nums.end())//找到目标值
 {
 	cout<<"yes"<<endl;
@@ -8,17 +17,26 @@ if(it!=nums.end())//找到目标值
 else{
 	cout<<"no"<<endl;
 }
-返回值：如果查找，返回其在向量中的位置，可使用此迭代器通过it-nums.begin()表示下标，*it表示其下标对应的值，查不找，返回nums.end()
+cout<<it-nums.begin()<<endl;//目标值下标
+cout<<*it<<endl;//具体目标值
+返回值：如果查找，返回其在向量中的位置，可使用此迭代器通过it-nums.begin()表示下标，*it表示其下标对应的值（方法与lower_bound和upper_bound相似），查不找，返回nums.end()
+
+3)
 map中
-map<int,int> mp;
-if(mp.find(target)!=mp.end())//找到目标值
+map<int,int> mp;//map自带的有find()函数
+auto it=mp.find(target);
+if(it!=mp.end())//找到目标值
 {
 	cout<<"yes"<<endl;
 }
 else{
 	cout<<"no"<<endl;
 }
+cout<<it-mp.begin()<<endl;//目标值下标
+cout<<*it<<endl;//具体目标值
 返回值：如果查找，它返回一个指向与键target关联的元素的迭代器，可使用此迭代器通过->first或者->second，查不找，返回mp.end():表示末端元素的下一个元素，这个迭代器起一个哨兵的作用，表示已经处理完所有的元素
+
+4)
 string中
 string a,b;
 if(a.find(b)!=string::npos)//找到目标值
