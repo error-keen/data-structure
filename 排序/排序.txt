@@ -1,0 +1,93 @@
+冒泡排序：
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 10;
+int main() {
+	int a[N] = { 1,9,3,2,7,6,8,5,0,4};
+	//排序
+	for (int i = 0;i < N-1;++i)
+		for (int j = 0;j < N - 1 - i;++j) 
+			if (a[j] > a[j + 1])
+				a[j] ^= a[j + 1] ^= a[j] ^= a[j + 1];
+	//输出
+	for (int i = 0;i < N;++i)
+		cout << a[i] << endl;
+	return 0;
+}
+选择排序：
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 10;
+int main() {
+	int a[N] = { 1,9,3,2,7,6,8,5,0,4};
+	//排序
+	for (int i = 0;i < N-1;++i)
+		for (int j = i+1;j < N;++j) 
+			if (a[i] > a[j])
+				a[i] ^= a[j] ^= a[i] ^= a[j];
+	//输出
+	for (int i = 0;i < N;++i)
+		cout << a[i] << endl;
+	return 0;
+}
+插入排序:
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 10;
+int main() {
+    int a[N]= { 1,9,3,2,7,6,8,5,0,4 };
+   for (int i = 1; i < N ; i++) {
+		int temp=a[i];
+		for (int j = i-1; j >=0; j--) {
+			if (a[j] > temp) {
+				a[j + 1] = a[j];
+				a[j] = temp;
+			}
+			else {
+				break;
+			}
+		}
+	}
+	//打印数组
+    for (int i = 0;i < N;++i)
+        cout << a[i] << endl;
+	return 0;
+}
+快速排序：
+//快速排序hoare版本 左侧元素作为基准值
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 10;
+void Quick_Sort(int *arr, int begin, int end){
+    if(begin > end) //递归边界，当begin>end时，说明只有一个元素或者没有元素，直接返回
+        return;
+    int tmp = arr[begin]; //选择第一个元素作为基准数
+    int i = begin; //i从左边开始扫描
+    int j = end; //j从右边开始扫描
+    while(i != j){ //当i和j相遇时，说明一轮扫描结束
+        while(arr[j] >= tmp && j > i) //从右往左扫描，找到第一个小于基准数的元素
+            j--;
+        while(arr[i] <= tmp && j > i) //从左往右扫描，找到第一个大于基准数的元素
+            i++;
+        if(j > i){ //如果i和j没有相遇，则交换i和j位置上的元素
+            int t = arr[i];
+            arr[i] = arr[j];
+            arr[j] = t;
+        }
+    }
+    //将基准数放到正确的位置上
+    arr[begin] = arr[i];
+    arr[i] = tmp;
+    //递归排序左右两边的子数组
+    Quick_Sort(arr, begin, i-1);
+    Quick_Sort(arr, i+1, end);
+}
+int main() {
+    int arr[N]= { 1,9,3,2,7,6,8,5,0,4 };
+    Quick_Sort(arr,0,N-1);
+    for (int i = 0;i < N;++i)
+    cout << arr[i] << endl; //打印排序后的数组
+	return 0;
+}
+
+
